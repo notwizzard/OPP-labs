@@ -1,0 +1,50 @@
+Elapsed time: 43.626027
+Answer is correct: 1
+Elapsed time: 22.917529
+Answer is correct: 1
+Elapsed time: 17.962451
+Answer is correct: 1
+Elapsed time: 14.917645
+Answer is correct: 1
+Elapsed time: 14.438837
+Answer is correct: 1
+Elapsed time: 12.997910
+Answer is correct: 1
+Elapsed time: 12.098224
+Answer is correct: 1
+Elapsed time: 11.313495
+Answer is correct: 1
+Elapsed time: 11.486416
+Answer is correct: 1
+Elapsed time: 11.374959
+Answer is correct: 1
+Elapsed time: 11.544968
+Answer is correct: 1
+Elapsed time: 11.304969
+Answer is correct: 1
+
+
+Elapsed time: 44.686953
+Answer is correct: 1
+Elapsed time: 24.433868
+Answer is correct: 1
+Elapsed time: 18.441933
+Answer is correct: 1
+Elapsed time: 15.557894
+Answer is correct: 1
+Elapsed time: 14.035578
+Answer is correct: 1
+Elapsed time: 13.767312
+Answer is correct: 1
+Elapsed time: 11.922194
+Answer is correct: 1
+Elapsed time: 11.632689
+Answer is correct: 1
+Elapsed time: 11.534992
+Answer is correct: 1
+Elapsed time: 11.632464
+Answer is correct: 1
+Elapsed time: 11.609181
+Answer is correct: 1
+Elapsed time: 11.527682
+Answer is correct: 1
