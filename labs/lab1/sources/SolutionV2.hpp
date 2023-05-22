@@ -14,7 +14,7 @@ protected:
     bool checkAnswer();
 
 public:
-    SolutionV2(int localRank, int worldSize, int vectorSize);
+    SolutionV2(int localRank, int worldSize, int vectorSize, double epsilon, double tau);
     void solve() override;
 };
 

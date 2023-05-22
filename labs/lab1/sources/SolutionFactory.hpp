@@ -7,7 +7,7 @@
 
 class SolutionFactory {
 public:
-    static SolutionV1* getSolution(int rank, int worldSize, int vectorSize);
+    static SolutionV1* getSolution(int rank, int worldSize, int vectorSize, double epsilon, double tau);
 };
 
 #endif

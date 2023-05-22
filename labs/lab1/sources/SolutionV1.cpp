@@ -22,8 +22,8 @@ void SolutionV1::init() {
     }
 }
 
-SolutionV1::SolutionV1(int localRank, int worldSize, int vectorSize) :
-    AbstractSolution(localRank, worldSize, vectorSize) {
+SolutionV1::SolutionV1(int localRank, int worldSize, int vectorSize, double epsilon, double tau) :
+    AbstractSolution(localRank, worldSize, vectorSize, epsilon, tau) {
     init();
 }
 

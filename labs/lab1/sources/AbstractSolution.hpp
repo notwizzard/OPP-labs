@@ -6,8 +6,8 @@
 
 class AbstractSolution {
 protected:
-    static constexpr double EPSILON = 0.0000000001;
-    static constexpr double TAU = 0.00001;
+    double EPSILON = 0.00000001;
+    double TAU = 0.00001;
 
     int rootRank = 0;
     int localRank;
@@ -34,7 +34,7 @@ protected:
     virtual double countLocalNormAXSubB();
 
 public:
-    AbstractSolution(int localRank, int worldSize, int vectorSize);
+    AbstractSolution(int localRank, int worldSize, int vectorSize, double epsilon, double tau);
     virtual void solve();
 };
 

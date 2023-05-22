@@ -1,8 +1,11 @@
 #include <cmath>
 #include "RootSolutionV1.hpp"
 #include <mpi.h>
+#include <iostream>
+#include <chrono>
 
 void RootSolutionV1::solve() {
+    auto start = std::chrono::high_resolution_clock::now();
     double error;
     do {
         updateLocalXVector();
@@ -18,10 +21,11 @@ void RootSolutionV1::solve() {
         MPI_Bcast(&running, 1, MPI_CXX_BOOL, localRank, MPI_COMM_WORLD);
     } while (running);
 
-    std::cout << "[ROOT " << localRank << "] solved | check answer status: " << checkAnswer() << std::endl;
-//    for (int i = 0; i < vectorSize; i++) {
-//        std::cout << XVector[i] << " ";
-//    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+    std::cout << "[ROOT " << localRank << "] solved in " << duration.count() << " microseconds | check answer status: " << checkAnswer() << std::endl;
+
 }
 
 bool RootSolutionV1::checkAnswer() {

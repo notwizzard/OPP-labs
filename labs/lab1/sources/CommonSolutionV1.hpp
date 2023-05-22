@@ -6,7 +6,7 @@
 class CommonSolutionV1 : public SolutionV1 {
 public:
     void solve() override;
-    CommonSolutionV1(int localRank, int worldSize, int vectorSize) : SolutionV1(localRank, worldSize, vectorSize) {};
+    CommonSolutionV1(int localRank, int worldSize, int vectorSize, double epsilon, double tau) : SolutionV1(localRank, worldSize, vectorSize, epsilon, tau) {};
 };
 
 #endif

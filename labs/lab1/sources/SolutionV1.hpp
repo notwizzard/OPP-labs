@@ -13,7 +13,7 @@ protected:
     double countLocalNormAXSubB() override;
 
 public:
-    SolutionV1(int localRank, int worldSize, int vectorSize);
+    SolutionV1(int localRank, int worldSize, int vectorSize, double epsilon, double tau);
     virtual void solve() override;
 };
 

@@ -1,26 +1,29 @@
 #include "SolutionV2.hpp"
 #include "Utils.hpp"
-#include <math.h>
+#include <cmath>
+#include <iostream>
 #include <mpi.h>
+#include <chrono>
 
 
-SolutionV2::SolutionV2(int localRank, int worldSize, int vectorSize) :
-        AbstractSolution(localRank, worldSize, vectorSize) {
+SolutionV2::SolutionV2(int localRank, int worldSize, int vectorSize, double epsilon, double tau) :
+        AbstractSolution(localRank, worldSize, vectorSize, epsilon, tau) {
     init();
 }
 
 void SolutionV2::init() {
     AMatrix.resize(chunkSize);
+    double tempNormB = 0;
     for (int i = 0; i < chunkSize; i++) {
         XVector.resize(chunkSize + 1, 0);
         BVector.resize(chunkSize + 1, vectorSize + 1);
         AXVector.resize(chunkSize, 0);
         AMatrix[i].resize(vectorSize, 1);
         AMatrix[i][i + beginIndex] = 2;
-        normB += BVector[i] * BVector[i];
+        tempNormB += BVector[i] * BVector[i];
     }
 
-    MPI_Allreduce(&normB, &normB, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    MPI_Allreduce(&tempNormB, &normB, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
     normB = std::sqrt(normB);
 
     for (int i = 0; i < worldSize; i++) {
@@ -30,6 +33,7 @@ void SolutionV2::init() {
 }
 
 void SolutionV2::solve() {
+    auto start = std::chrono::high_resolution_clock::now();
     double error;
     do {
         updateLocalXVector();
@@ -43,7 +47,11 @@ void SolutionV2::solve() {
         running = error >= EPSILON;
     } while (running);
 
-    std::cout << "[" << localRank << " rank] solved | check answer status: " << checkAnswer() << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    if (localRank == 0) {
+        std::cout << "[" << localRank << " rank] solved in " << duration.count() << " microseconds | check answer status: " << checkAnswer() << std::endl;
+    }
 }
 
 bool SolutionV2::checkAnswer() {
@@ -83,7 +91,7 @@ void SolutionV2::updateLocalAXMatrix() {
             }
         }
 
-        ompi_status_public_t status;
+        MPI_Status status;
         MPI_Sendrecv(&XVector[0],
                      recvcounts[(shiftNum + localRank) % worldSize],
                      MPI_DOUBLE,

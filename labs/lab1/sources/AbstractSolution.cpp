@@ -5,8 +5,8 @@
 #include "AbstractSolution.hpp"
 #include "Utils.hpp"
 
-AbstractSolution::AbstractSolution(int localRank, int worldSize, int vectorSize)
-    : localRank(localRank), worldSize(worldSize), vectorSize(vectorSize) {
+AbstractSolution::AbstractSolution(int localRank, int worldSize, int vectorSize, double epsilon, double tau)
+    : localRank(localRank), worldSize(worldSize), vectorSize(vectorSize), EPSILON(epsilon), TAU(tau) {
     beginIndex = Utils::beginIndex(localRank, worldSize, vectorSize);
     endIndex = Utils::endIndex(localRank, worldSize, vectorSize);
     chunkSize = Utils::chunkSize(localRank, worldSize, vectorSize);
